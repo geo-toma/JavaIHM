@@ -17,6 +17,5 @@ public class Fenetre extends JFrame {
 	}
 	
 	public void name() {
-		System.out.println();
 	}
 }
