@@ -1,18 +1,29 @@
 package animation;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Fenetre extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	Panneau pan = new Panneau();
+	JButton bouton = new JButton("mon bouton");
+	JPanel content = new JPanel();
 	
 	public Fenetre() {
 		this.setTitle("animation");
 		this.setSize(300, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setContentPane(pan);
+		content.setBackground(Color.WHITE);
+		content.setLayout(new BorderLayout());
+		content.add(pan, BorderLayout.CENTER);
+		content.add(bouton, BorderLayout.SOUTH);
+		this.setContentPane(content);
 		this.setVisible(true);
 		go();
 	}
