@@ -2,27 +2,43 @@ package animation;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import interactionButton.Bouton;
 
 public class Fenetre extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	Panneau pan = new Panneau();
-	JButton bouton = new JButton("mon bouton");
+	Bouton bouton = new Bouton("Go");
+	Bouton bouton1 = new Bouton("Stop");
+	JPanel bcontent = new JPanel();
 	JPanel content = new JPanel();
+	
+	int x,y;
+	boolean animated = true;
 	
 	public Fenetre() {
 		this.setTitle("animation");
 		this.setSize(300, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
+		
+		bouton.addActionListener(new BoutonListener());
+		bouton.setEnabled(false);
+		bouton1.addActionListener(new Bouton2Listener());
+		
+		bcontent.add(bouton);
+		bcontent.add(bouton1);
+		
 		content.setBackground(Color.WHITE);
 		content.setLayout(new BorderLayout());
 		content.add(pan, BorderLayout.CENTER);
-		content.add(bouton, BorderLayout.SOUTH);
+		content.add(bcontent, BorderLayout.SOUTH);
 		this.setContentPane(content);
 		this.setVisible(true);
 		go();
@@ -30,8 +46,9 @@ public class Fenetre extends JFrame {
 
 	private void go() {
 		boolean backX = false, backY = false;
-		for (; ;) {
-			int x = pan.getPosX(), y = pan.getPosY();
+		x = pan.getPosX();
+		y = pan.getPosY();
+		while(animated) {
 			if(x < 1)
 				backX = false;
 			if(x > pan.getWidth()-50)
@@ -61,6 +78,28 @@ public class Fenetre extends JFrame {
 	}
 	
 	public void name() {
+		
+	}
+	
+	class BoutonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			animated = true;
+			bouton.setEnabled(false);
+			bouton1.setEnabled(true);
+		}
+		
+	}
+	
+	class Bouton2Listener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			animated = false;
+			bouton.setEnabled(true);
+			bouton1.setEnabled(false);
+		}
 		
 	}
 
