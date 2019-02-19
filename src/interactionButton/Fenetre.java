@@ -18,7 +18,7 @@ public class Fenetre extends JFrame implements ActionListener {
 	JPanel pan = new JPanel();
 	JLabel label = new JLabel(str);
 	JButton bouton1 = new JButton("bouton 1");
-	JButton bouton2 = new JButton("bouton 2");	
+	JButton bouton2 = new JButton("bouton 2");
 	
 	public Fenetre() {
 		this.setTitle("interaction bouton");
@@ -39,7 +39,6 @@ public class Fenetre extends JFrame implements ActionListener {
 		label.setForeground(Color.BLUE);
 		label.setHorizontalAlignment(JLabel.CENTER);
 		
-		this.getContentPane().add(label, BorderLayout.NORTH);
 		this.getContentPane().add(pan, BorderLayout.SOUTH);
 		
 		this.setVisible(true);

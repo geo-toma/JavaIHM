@@ -8,8 +8,8 @@ public class Main {
 		//Fenetre fen = new Fenetre(new GridLayout()); 
 		//Fenetre fen = new Fenetre("box layout"); 
 		//Fenetre fen = new Fenetre("box layout", 120);
-		//Fenetre1 fen = new Fenetre1();
-		Fenetre2 fen = new Fenetre2();
+		Fenetre1 fen = new Fenetre1();
+		//Fenetre2 fen = new Fenetre2();
 		fen.name();
 
 	}
