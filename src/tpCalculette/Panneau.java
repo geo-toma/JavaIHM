@@ -5,30 +5,28 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 public class Panneau extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	JLabel label = new JLabel("du texte");
+	static JLabel label = new JLabel();
 	JPanel panel = new JPanel();
 	JPanel panel2 = new JPanel();
-	JPanel panel3 = new JPanel();
 	
 	public Panneau() {
 		this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-		this.setPreferredSize(new Dimension(180, 30));
+		this.setPreferredSize(new Dimension(195, 30));
 		
 		panel2.setLayout(new BorderLayout());
+		Font police = new Font("Tahoma", Font.BOLD, 14);
+		label.setFont(police);
+		label.setForeground(Color.BLUE);
 		label.setHorizontalAlignment(JLabel.RIGHT);
 		
-		panel.setBackground(Color.RED);
-		panel2.setBackground(Color.BLUE);
 		panel.setOpaque(false);
 		panel2.setOpaque(false);
 		panel2.add(label);
