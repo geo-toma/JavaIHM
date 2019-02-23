@@ -88,6 +88,14 @@ public class Fenetre extends JFrame {
 			animated = true;
 			bouton.setEnabled(false);
 			bouton1.setEnabled(true);
+			Thread thread = new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					go();
+				}
+			});
+			thread.start();
 		}
 		
 	}
