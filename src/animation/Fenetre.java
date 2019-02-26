@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import interactionButton.Bouton;
@@ -13,14 +16,19 @@ import interactionButton.Bouton;
 public class Fenetre extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	Panneau pan = new Panneau();
-	Bouton bouton = new Bouton("Go");
-	Bouton bouton1 = new Bouton("Stop");
-	JPanel bcontent = new JPanel();
-	JPanel content = new JPanel();
+	private Panneau pan = new Panneau();
+	private Bouton bouton = new Bouton("Go");
+	private Bouton bouton1 = new Bouton("Stop");
+	private JPanel bcontent = new JPanel();
+	private JPanel content = new JPanel();
+	private String[] tab = {"ROND" ,"CARRE" ,"TRIANGLE" ,"ETOILE"};
+	private JComboBox<String> combo = new JComboBox<>(tab);
+	private JCheckBox box = new JCheckBox("Morphing");
+	private JLabel label = new JLabel("Choix de forme");
 	
 	int x,y;
 	boolean animated = true;
+	boolean backX = false, backY = false;
 	
 	public Fenetre() {
 		this.setTitle("animation");
@@ -35,8 +43,16 @@ public class Fenetre extends JFrame {
 		bcontent.add(bouton);
 		bcontent.add(bouton1);
 		
+		JPanel top = new JPanel();
+		combo.addActionListener(new ItemAction());
+		box.addActionListener(new BoxAction());
+		top.add(label);
+		top.add(combo);
+		top.add(box);
+		
 		content.setBackground(Color.WHITE);
 		content.setLayout(new BorderLayout());
+		content.add(top, BorderLayout.NORTH);
 		content.add(pan, BorderLayout.CENTER);
 		content.add(bcontent, BorderLayout.SOUTH);
 		this.setContentPane(content);
@@ -45,17 +61,16 @@ public class Fenetre extends JFrame {
 	}
 
 	private void go() {
-		boolean backX = false, backY = false;
 		x = pan.getPosX();
 		y = pan.getPosY();
 		while(animated) {
 			if(x < 1)
 				backX = false;
-			if(x > pan.getWidth()-50)
+			if(x > pan.getWidth()-pan.getDrawSize())
 				backX = true;
 			if(y < 1)
 				backY = false;
-			if(y > pan.getHeight()-50)
+			if(y > pan.getHeight()-pan.getDrawSize())
 				backY = true;
 			
 			if(backX)
@@ -107,6 +122,27 @@ public class Fenetre extends JFrame {
 			animated = false;
 			bouton.setEnabled(true);
 			bouton1.setEnabled(false);
+		}
+		
+	}
+	
+	class ItemAction implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			pan.setForme(combo.getSelectedItem().toString());
+		}
+		
+	}
+	
+	class BoxAction implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(((JCheckBox)e.getSource()).isSelected())
+				pan.setMorph(true);
+			else
+				pan.setMorph(false);
 		}
 		
 	}
